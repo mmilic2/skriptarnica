@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "922166297142",
+    "firebase_url": "https://dijeljenjenastavnihmaterijala.firebaseio.com",
+    "project_id": "dijeljenjenastavnihmaterijala",
+    "storage_bucket": "dijeljenjenastavnihmaterijala.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922166297142:android:e4ac90890e9c162523ce97",
+        "android_client_info": {
+          "package_name": "com.matej.skriptarnica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922166297142-qq09ap6ddsc4oupdojce06bq45s7o9i9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEDwZS4GPjKeWGLLY2mJHXE7ROnukmpC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922166297142-qq09ap6ddsc4oupdojce06bq45s7o9i9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
