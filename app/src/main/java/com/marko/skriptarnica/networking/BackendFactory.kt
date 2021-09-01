@@ -22,7 +22,7 @@ object BackendFactory {
     private fun createRetrofit(): Retrofit? {
         retrofit = Retrofit.Builder()
             .client(httpClient)
-            .baseUrl("http://192.168.1.14:8080/")
+            .baseUrl("http://192.168.1.12:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit

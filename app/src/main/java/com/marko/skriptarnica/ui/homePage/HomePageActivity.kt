@@ -12,6 +12,7 @@ import com.marko.skriptarnica.common.showFragment
 import com.marko.skriptarnica.ui.authentication.AuthActivity
 import com.marko.skriptarnica.ui.base.BaseActivity
 import com.marko.skriptarnica.ui.homePage.fragments.mainPage.HomeFragment
+import com.marko.skriptarnica.ui.homePage.fragments.profile.MyProfileFragment
 import kotlinx.android.synthetic.main.activity_home_page.*
 
 class HomePageActivity : BaseActivity() {
@@ -62,6 +63,10 @@ class HomePageActivity : BaseActivity() {
             R.id.logOut -> {
                 FirebaseAuth.getInstance().signOut()
                 startActivity(AuthActivity::class.java)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.profile -> {
+                showFragment(R.id.homePageFragmentContainer, MyProfileFragment.getInstance())
                 return@OnNavigationItemSelectedListener true
             }
             else -> return@OnNavigationItemSelectedListener false

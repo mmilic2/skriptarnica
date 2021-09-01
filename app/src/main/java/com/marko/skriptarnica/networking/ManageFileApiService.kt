@@ -20,4 +20,7 @@ interface ManageFileApiService {
 
     @POST("/files/comment/{fileId}")
     fun postFileComment(@Path("fileId") fileId: String, @Body comment: String): Call<BackendTask>
+
+    @GET("/files/{study}/{subject}/{findParam}")
+    fun getFilesByStudyAndYearFileNameContaining(@Path("study") study: String, @Path("subject") subject: String, @Path("findParam") findParam: String): Call<List<BackendTask>>
 }

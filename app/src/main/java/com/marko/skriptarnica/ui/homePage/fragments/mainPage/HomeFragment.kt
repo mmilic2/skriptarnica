@@ -15,6 +15,7 @@ class HomeFragment : BaseFragment() {
     override fun getLayoutResourceId(): Int = R.layout.fragment_home
 
     override fun setupUi() {
+        setTitle("Skriptarnica")
     }
 
     override fun setOnClickListeners() {

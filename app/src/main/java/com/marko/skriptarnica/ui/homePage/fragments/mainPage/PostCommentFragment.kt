@@ -13,6 +13,7 @@ import com.marko.skriptarnica.Skriptarnica
 import com.marko.skriptarnica.common.showFragment
 import com.marko.skriptarnica.model.BackendTask
 import com.marko.skriptarnica.networking.BackendFactory
+import com.marko.skriptarnica.persistance.GetFileNameRepository
 import com.marko.skriptarnica.persistance.GetIdRepository
 import com.marko.skriptarnica.ui.base.BaseFragment
 import com.marko.skriptarnica.ui.homePage.FileWebView
@@ -29,11 +30,12 @@ class PostCommentFragment : BaseFragment() {
 
     private val interactor = BackendFactory.getManageFileApiInteractor()
     private val selectedFileIdRepository = GetIdRepository()
+    private val selectedFileNameRepository = GetFileNameRepository()
 
     override fun getLayoutResourceId(): Int = R.layout.fragment_post_comment
 
     override fun setupUi() {
-
+        setTitle(selectedFileNameRepository.getFileName())
     }
 
     override fun setOnClickListeners() {
@@ -42,7 +44,7 @@ class PostCommentFragment : BaseFragment() {
         }
         downloadButton.setOnClickListener {
             val intent = Intent(Skriptarnica.instance, FileWebView::class.java)
-            intent.putExtra("Url", "http://192.168.1.10:8080/download/" + selectedFileIdRepository.getFileId())
+            intent.putExtra("Url", "http://192.168.94.180:8080/download/" + selectedFileIdRepository.getFileId())
             startActivity(intent)
         }
     }

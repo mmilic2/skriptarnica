@@ -35,7 +35,7 @@ class DataListAdapter(
 
 class DataListHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     fun bindData(data: BackendTask, downloadClickedListener: DownloadClickedListener){
-        itemView.setOnClickListener{ downloadClickedListener(data.id) }
+        itemView.setOnClickListener{ downloadClickedListener(data.id, data.fileName) }
         itemView.dataValue.text = data.fileName
         itemView.commentValue.text = data.comment
     }

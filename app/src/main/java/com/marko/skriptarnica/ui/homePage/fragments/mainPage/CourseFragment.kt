@@ -8,6 +8,7 @@ import com.marko.skriptarnica.common.*
 import com.marko.skriptarnica.persistance.SubjectTitlesRepository
 import com.marko.skriptarnica.ui.adapter.TitlesListAdapter
 import com.marko.skriptarnica.ui.base.BaseFragment
+import com.marko.skriptarnica.ui.homePage.HomePageActivity
 import kotlinx.android.synthetic.main.fragment_course.*
 
 
@@ -18,6 +19,11 @@ class CourseFragment : BaseFragment() {
     override fun getLayoutResourceId(): Int = R.layout.fragment_course
 
     override fun setupUi() {
+        when(studijClicked){
+            STRUCNI_STUDIJ -> setTitle("Stručni studij")
+            PREDDIPLOMSKI_STUDIJ -> setTitle("Preddiplomski studij")
+            DIPLOMSKI_STUDIJ -> setTitle("Diplomski studij")
+        }
         setRecyclerView()
         setRecyclerViewData()
     }

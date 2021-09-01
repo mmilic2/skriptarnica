@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +18,7 @@ import com.marko.skriptarnica.model.FileResponse
 import com.marko.skriptarnica.model.FilesResponse
 import com.marko.skriptarnica.model.User
 import com.marko.skriptarnica.networking.BackendFactory
+import com.marko.skriptarnica.persistance.GetFileNameRepository
 import com.marko.skriptarnica.persistance.GetIdRepository
 import com.marko.skriptarnica.persistance.SelectedStudyAndSubjectRepository
 import com.marko.skriptarnica.ui.adapter.DataListAdapter
@@ -39,6 +41,7 @@ class ScriptFragment : BaseFragment() {
     private val adapter by lazy { DataListAdapter(::onItemClicked) }
     var db = FirebaseFirestore.getInstance()
     private val selectedFileIdRepository = GetIdRepository()
+    private val selectedfileNameRepository = GetFileNameRepository()
 
     override fun getLayoutResourceId(): Int = R.layout.fragment_script
 
@@ -47,6 +50,7 @@ class ScriptFragment : BaseFragment() {
         Log.d("+++", selectedRepository.getSelectedSubject())
         scriptRecyclerView.layoutManager = LinearLayoutManager(context)
         scriptRecyclerView.adapter = adapter
+        setTitle(selectedRepository.getSelectedSubject())
         interactor.getFileByStudyAndYear(selectedRepository.getSelectedStudy(), selectedRepository.getSelectedSubject(), getScriptsCallback())
     }
 
@@ -95,6 +99,9 @@ class ScriptFragment : BaseFragment() {
             startActivityForResult(Intent.createChooser(intent, "Select a file"), 777)
 
 
+        }
+        findButton.setOnClickListener {
+            interactor.getFilesByStudyAndYearFileNameContaining(selectedRepository.getSelectedStudy(), selectedRepository.getSelectedSubject(), findEditText.text.toString(), getFilesByStudyAndYearFileNameContainingCallback())
         }
     }
 
@@ -160,7 +167,7 @@ class ScriptFragment : BaseFragment() {
         }
     }
 
-    private fun onItemClicked(id: String) {
+    private fun onItemClicked(id: String, fileName: String) {
         val user = FirebaseAuth.getInstance().currentUser
         var email: String = ""
         user?.let {
@@ -174,14 +181,36 @@ class ScriptFragment : BaseFragment() {
                 if(dbUser.profession.equals("Profesor")) {
                     Log.d("+++","nesto")
                     selectedFileIdRepository.setSelectedFileId(id)
+                    selectedfileNameRepository.setSelectedFileName(fileName)
                     activity?.showFragment(R.id.homePageFragmentContainer, PostCommentFragment.getInstance(), true)
                 } else {
                     val intent = Intent(Skriptarnica.instance, FileWebView::class.java)
-                    intent.putExtra("Url", "http://192.168.1.10:8080/download/" + id)
+                    intent.putExtra("Url", "http://192.168.1.12:8080/download/" + id)
                     startActivity(intent)
                 }
             } else {
 
+            }
+        }
+    }
+
+    private fun getFilesByStudyAndYearFileNameContainingCallback(): Callback<List<BackendTask>> = object : Callback<List<BackendTask>> {
+        override fun onFailure(call: Call<List<BackendTask>>?, t: Throwable?) {
+            Log.d("+++", t.toString())
+        }
+
+        override fun onResponse(call: Call<List<BackendTask>>?, response: Response<List<BackendTask>>) {
+            if (response.isSuccessful) {
+                Log.d("+++", "test")
+
+
+                response.body()?.run {
+                    Log.d("+++", this.toString())
+                    adapter.setData(this)
+
+                    /*RESPONSE_OK -> handleOkResponse(response)
+                    else -> handleSomethingWentWrong(response)*/
+                }
             }
         }
     }

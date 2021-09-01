@@ -6,11 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
+    <EditText
+        android:id="@+id/findEditText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@id/scriptRecyclerView"
+        app:layout_constraintRight_toLeftOf="@id/findButton"
+        />
+    <Button
+        android:id="@+id/findButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@id/scriptRecyclerView"
+        app:layout_constraintLeft_toRightOf="@id/findEditText"
+        android:text="Search"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/scriptRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/findButton"
+        android:layout_marginTop="50dp"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

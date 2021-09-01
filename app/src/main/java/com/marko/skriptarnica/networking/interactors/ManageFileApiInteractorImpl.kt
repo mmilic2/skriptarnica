@@ -38,4 +38,13 @@ class ManageFileApiInteractorImpl(private val apiService: ManageFileApiService) 
         apiService.postFileComment(fileId, comment).enqueue(postFileCommentCallback)
     }
 
+    override fun getFilesByStudyAndYearFileNameContaining(
+        study: String,
+        subject: String,
+        findParam: String,
+        getFilesByStudyAndYearFileNameContainingCallback: Callback<List<BackendTask>>
+    ){
+        apiService.getFilesByStudyAndYearFileNameContaining(study, subject, findParam).enqueue(getFilesByStudyAndYearFileNameContainingCallback)
+    }
+
 }

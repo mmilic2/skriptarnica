@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.marko.skriptarnica.Skriptarnica
+import com.marko.skriptarnica.ui.homePage.HomePageActivity
 
 abstract class BaseFragment: Fragment() {
 
@@ -23,6 +24,10 @@ abstract class BaseFragment: Fragment() {
     protected fun startActivity(newActivity: Class<*>){
         val intent = Intent(Skriptarnica.instance, newActivity)
         startActivity(intent)
+    }
+
+    protected fun setTitle(title: String){
+        (activity as HomePageActivity?)?.supportActionBar?.title = title
     }
 
     abstract fun getLayoutResourceId(): Int

@@ -15,4 +15,6 @@ interface ManageFileApiInteractor {
 
     fun postFileComment(fileId: String, comment: String, postFileCommentCallback: Callback<BackendTask>)
 
+    fun getFilesByStudyAndYearFileNameContaining(study: String, subject: String, findParam: String, getFilesByStudyAndYearFileNameContainingCallback: Callback<List<BackendTask>>)
+
 }
